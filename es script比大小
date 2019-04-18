@@ -1,0 +1,16 @@
+GET product/_search
+{
+ "query": {
+   "bool":{
+     "must": [
+       {"exists":{
+         "field":"character.a"
+       }},
+       {"range":{"character.a":{"gt":0}}},
+       {
+          "script": {
+            "script": "doc['b'].value > doc['character.a'].value"
+          }}
+     ]
+   }}
+}
